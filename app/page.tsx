@@ -51,6 +51,7 @@ const data: {
 const name = '久々のjsx'
 
 export default function Home() {
+  const sliceData = data.contents.slice(0, 2)
   return (
     <>
       <section className={style.top}>
@@ -68,7 +69,41 @@ export default function Home() {
       </section>
       <section className={style.news}>
         <h2 className={style.newsTitle}>News</h2>
-
+        <ul>
+          {sliceData.map((article) => (
+            <li key={article.id} className={style.list}>
+              <div className={style.link}>
+                <Image
+                  className={style.image}
+                  src="/no-image.png"
+                  alt="No Image"
+                  width={1200}
+                  height={630}
+                />
+                <dl className={style.contents}>
+                  <dt className={style.newsItemTitle}>
+                    {article.title}
+                  </dt>
+                  <dd className={style.meta}>
+                    <span className={style.tag}>
+                      {article.category.name}
+                    </span>
+                    <span className={style.data}>
+                      <Image
+                        src="/clock.svg"
+                        alt=""
+                        width={16}
+                        height={16}
+                        priority
+                      />
+                      {article.publishedAt}
+                    </span>
+                  </dd>
+                </dl>
+              </div>
+            </li>
+          ))}
+        </ul>
       </section>
     </>
   )
